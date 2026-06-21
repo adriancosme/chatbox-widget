@@ -18,7 +18,16 @@ Un widget de chatbox personalizado, premium y altamente configurable diseñado e
 
 ## 🛠️ Instalación en StreamElements
 
-Sigue estos sencillos pasos para instalar el widget en tu overlay de StreamElements:
+### ⚡ Importación Rápida (Recomendado)
+
+Puedes importar este overlay de manera directa y rápida haciendo clic en el siguiente enlace:
+👉 **[Importar Widget del Chatbox en StreamElements](https://overlays.batary.dev/share/cmqodqqhs0003jo066p2ens5b)**
+
+---
+
+### 📦 Instalación Manual
+
+Si prefieres configurar el widget manualmente o editar el código fuente, sigue estos pasos:
 
 1. Ve a tu panel de control de [StreamElements](https://streamelements.com/) y abre tu **Editor de Overlays**.
 2. Añade un nuevo elemento: **Static/Custom** $\rightarrow$ **Custom Widget**.
