@@ -1,0 +1,177 @@
+:root {
+  /* Lumina Stream Customizable Colors (Defaults) */
+  --bubble-bg: rgba(23, 31, 51, 0.6);
+  --bubble-border: rgba(218, 226, 253, 0.1);
+  --username-fallback: #d2bbff;
+  --text-color: #ccc3d8;
+  --username-shadow: rgba(210, 187, 255, 0.3);
+
+  /* Sizing Defaults */
+  --bubble-radius: 8px;
+  --font-size-text: 13px;
+  --font-size-username: 14px;
+
+  /* Typography */
+  --font-inter: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-inter);
+  color: var(--color-on-surface);
+  /* Use transparent background so it looks like an overlay */
+  background: transparent; 
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.lumina-chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+  min-height: 400px;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: var(--bubble-radius);
+  
+  /* Size adaptation */
+  max-width: 85%;
+  width: fit-content;
+  
+  /* Glassmorphism Effect */
+  background: var(--bubble-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--bubble-border);
+  
+  /* Initial state for animation */
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+
+/* Entrance Animations */
+.chat-message.slide-bottom {
+  transform: translateY(20px);
+  animation: slideInBottom 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.chat-message.slide-top {
+  transform: translateY(-20px);
+  animation: slideInTop 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.chat-message.slide-left {
+  transform: translateX(-20px);
+  animation: slideInLeft 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.chat-message.slide-right {
+  transform: translateX(20px);
+  animation: slideInRight 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes slideInBottom {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInTop {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.chat-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.chat-badge {
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+}
+
+.chat-username {
+  font-weight: 600;
+  font-size: var(--font-size-username);
+  line-height: 1.2;
+  /* Glow effect for username */
+  text-shadow: 0 0 8px var(--username-shadow);
+}
+
+.chat-content {
+  font-weight: 400;
+  font-size: var(--font-size-text);
+  line-height: 18px;
+  color: var(--text-color);
+  word-wrap: break-word;
+}
+
+.chat-emote {
+  height: 24px;
+  vertical-align: middle;
+  margin: -4px 0;
+  display: inline-block;
+}
+
+.chat-content.large-emote .chat-emote {
+  height: 72px;
+  margin: 0;
+  display: block;
+}
+
+.chat-message.single-emote-msg {
+  align-items: center;
+  text-align: center;
+}
+
+.chat-message.single-emote-msg .chat-header {
+  justify-content: center;
+}
+
+/* Animations for removal */
+.chat-message.fade-out {
+  opacity: 0;
+  transform: scale(0.95) translateY(-10px);
+}
+
+
