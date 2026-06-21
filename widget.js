@@ -2,6 +2,9 @@ let sevtEmotes = new Map();
 let globalMaxMessages = 50;
 let globalEntranceDirection = 'bottom';
 let globalBubbleAlignment = 'left';
+let globalShowSubs = false;
+let globalShowCheers = false;
+let globalShowTips = false;
 
 // Global message listener to discover elements
 window.addEventListener('message', function(event) {
@@ -21,6 +24,9 @@ window.addEventListener('onWidgetLoad', function (obj) {
     globalMaxMessages = fieldData.maxMessages || 50;
     globalEntranceDirection = fieldData.entranceDirection || 'bottom';
     globalBubbleAlignment = fieldData.bubbleAlignment || 'left';
+    globalShowSubs = fieldData.showSubs === true;
+    globalShowCheers = fieldData.showCheers === true;
+    globalShowTips = fieldData.showTips === true;
     
     // Apply container alignment style
     const container = document.getElementById('log');
@@ -98,6 +104,12 @@ window.addEventListener('onEventReceived', function (obj) {
 
     if (listener === 'message') {
         addMessage(event.data, container);
+    } else if (listener === 'subscriber-latest' && globalShowSubs) {
+        addEventMessage('sub', event, container);
+    } else if (listener === 'cheer-latest' && globalShowCheers) {
+        addEventMessage('cheer', event, container);
+    } else if (listener === 'tip-latest' && globalShowTips) {
+        addEventMessage('tip', event, container);
     } else if (listener === 'delete-message') {
         deleteMessage(event.msgId, container);
     } else if (listener === 'delete-messages') {
@@ -240,4 +252,105 @@ function escapeHTML(str) {
 
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Logic to construct and append event messages (sub, cheer, tip)
+function addEventMessage(type, eventData, container) {
+    const messageEl = document.createElement('div');
+    messageEl.classList.add('chat-message', 'event-message', `event-${type}`);
+    messageEl.classList.add(`slide-${globalEntranceDirection}`);
+    
+    // Attach IDs as data attributes if present
+    if (eventData.msgId) {
+        messageEl.setAttribute('data-msg-id', eventData.msgId);
+    }
+    if (eventData.userId) {
+        messageEl.setAttribute('data-user-id', eventData.userId);
+    }
+
+    // Header for the event (uppercase tracking metadata badge + username)
+    const headerEl = document.createElement('div');
+    headerEl.classList.add('chat-header');
+    
+    const badgeEl = document.createElement('span');
+    badgeEl.classList.add('event-badge');
+    
+    let titleText = '';
+    let bodyText = '';
+    
+    if (type === 'sub') {
+        badgeEl.textContent = 'SUSCRIPCIÓN';
+        badgeEl.classList.add('badge-sub');
+        
+        const tierName = eventData.tier === 'prime' ? 'Prime' : (eventData.tier ? `Tier ${eventData.tier[0]}` : 'Tier 1');
+        
+        if (eventData.gifted) {
+            titleText = eventData.sender || 'Un espectador';
+            bodyText = `¡Regaló una suscripción (${tierName}) a ${eventData.name}!`;
+        } else {
+            titleText = eventData.name;
+            const months = parseInt(eventData.amount) || 1;
+            bodyText = months > 1 
+                ? `¡Se suscribió por ${months} meses (${tierName})!` 
+                : `¡Se suscribió (${tierName})!`;
+        }
+    } else if (type === 'cheer') {
+        badgeEl.textContent = 'BITS';
+        badgeEl.classList.add('badge-cheer');
+        titleText = eventData.name;
+        bodyText = `¡Envió ${eventData.amount} bits!`;
+    } else if (type === 'tip') {
+        badgeEl.textContent = 'DONACIÓN';
+        badgeEl.classList.add('badge-tip');
+        titleText = eventData.name;
+        
+        // Format amount with currency symbol
+        const currency = eventData.currency || '$';
+        let amountFormatted = eventData.amount;
+        if (typeof eventData.amount === 'number') {
+            amountFormatted = eventData.amount.toFixed(2);
+        } else if (!isNaN(eventData.amount)) {
+            amountFormatted = parseFloat(eventData.amount).toFixed(2);
+        }
+            
+        bodyText = `¡Donó ${currency}${amountFormatted}!`;
+    }
+    
+    headerEl.appendChild(badgeEl);
+    
+    // Event Username
+    const usernameEl = document.createElement('span');
+    usernameEl.classList.add('chat-username', 'event-username');
+    usernameEl.innerText = titleText;
+    headerEl.appendChild(usernameEl);
+    
+    messageEl.appendChild(headerEl);
+    
+    // Content / Event Body
+    const contentEl = document.createElement('div');
+    contentEl.classList.add('chat-content', 'event-content');
+    
+    const bodyEl = document.createElement('span');
+    bodyEl.classList.add('event-body-text');
+    bodyEl.innerText = bodyText;
+    contentEl.appendChild(bodyEl);
+    
+    // User message (if they sent one along with sub/cheer/tip)
+    if (eventData.message && eventData.message.trim() !== '') {
+        const userMsgEl = document.createElement('div');
+        userMsgEl.classList.add('event-user-message');
+        userMsgEl.innerText = eventData.message;
+        contentEl.appendChild(userMsgEl);
+    }
+    
+    messageEl.appendChild(contentEl);
+    container.appendChild(messageEl);
+    
+    // Manage Max Messages
+    while (container.childElementCount > globalMaxMessages) {
+        container.removeChild(container.firstChild);
+    }
+    
+    // Auto-scroll to bottom of the window
+    window.scrollTo(0, document.body.scrollHeight);
 }

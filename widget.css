@@ -174,4 +174,65 @@ body {
   transform: scale(0.95) translateY(-10px);
 }
 
+/* Event Messages styling */
+.event-message {
+  border-left: 3px solid var(--primary);
+}
+
+.event-sub {
+  border-left-color: var(--primary); /* Electric Violet */
+  box-shadow: inset 4px 0 10px rgba(210, 187, 255, 0.05);
+}
+
+.event-cheer {
+  border-left-color: var(--secondary); /* Cyan Pulse */
+  box-shadow: inset 4px 0 10px rgba(76, 215, 246, 0.05);
+}
+
+.event-tip {
+  border-left-color: #03b5d3; /* Cyan Accent */
+  box-shadow: inset 4px 0 10px rgba(3, 181, 211, 0.05);
+}
+
+.event-badge {
+  font-family: var(--font-inter);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 0.25rem;
+  color: #060e20;
+}
+
+.badge-sub {
+  background-color: var(--primary);
+}
+
+.badge-cheer {
+  background-color: var(--secondary);
+}
+
+.badge-tip {
+  background-color: #03b5d3;
+}
+
+.event-username {
+  color: #ffffff !important;
+}
+
+.event-body-text {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.event-user-message {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  font-style: italic;
+  border-radius: 2px;
+}
+
 

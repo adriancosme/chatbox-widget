@@ -66,6 +66,12 @@ Una vez instalado, verás las siguientes opciones en el menú lateral de StreamE
 * **Bubble Corner Radius:** Nivel de redondeado de las esquinas de los mensajes (en píxeles).
 * **Font Size:** Tamaño general de la fuente (en píxeles). El tamaño del nombre de usuario se escala automáticamente.
 
+### 6. Event Settings (Opcional - Desactivados por defecto)
+* **Show Subscriptions in Chat:** Muestra alertas cuando alguien se suscribe o regala una suscripción en el canal.
+* **Show Bits/Cheers in Chat:** Muestra alertas cuando alguien envía bits en el chat.
+* **Show Tips/Donations in Chat:** Muestra alertas cuando se recibe una donación económica.
+
+
 ---
 
 ## ♿ Accesibilidad y Rendimiento

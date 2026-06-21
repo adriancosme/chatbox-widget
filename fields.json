@@ -111,5 +111,23 @@
     "max": 24,
     "step": 1,
     "group": "Theme Size"
+  },
+  "showSubs": {
+    "type": "checkbox",
+    "label": "Show Subscriptions in Chat",
+    "value": false,
+    "group": "Event Settings"
+  },
+  "showCheers": {
+    "type": "checkbox",
+    "label": "Show Bits/Cheers in Chat",
+    "value": false,
+    "group": "Event Settings"
+  },
+  "showTips": {
+    "type": "checkbox",
+    "label": "Show Tips/Donations in Chat",
+    "value": false,
+    "group": "Event Settings"
   }
 }
