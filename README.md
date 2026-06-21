@@ -1,6 +1,6 @@
-# Lumina Stream Chatbox
+# Custom StreamElements Chatbox
 
-Un widget de chatbox personalizado, premium y altamente configurable diseñado específicamente para **StreamElements** (compatible con Twitch). Este widget utiliza los principios de diseño de **Lumina Stream**, con soporte para animaciones de entrada, personalización completa de colores y tipografía, y soporte nativo para emotes de **7TV**.
+Un widget de chatbox personalizado, premium y altamente configurable diseñado específicamente para **StreamElements** (compatible con Twitch). Cuenta con soporte para animaciones de entrada, personalización completa de colores y tipografía, y soporte nativo para emotes de **7TV**.
 
 ---
 

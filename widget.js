@@ -7,14 +7,14 @@ let globalBubbleAlignment = 'left';
 window.addEventListener('message', function(event) {
     if (event.data) {
         if (typeof event.data === 'string' || (event.data.type && event.data.type.includes('event')) || event.data.method) {
-            console.log('[Lumina Chatbox] window.message:', event.data);
+            console.log('[Chatbox Widget] window.message:', event.data);
         }
     }
 });
 
 // Fetch 7TV Emotes globally and configure settings
 window.addEventListener('onWidgetLoad', function (obj) {
-    console.log('[Lumina Chatbox] onWidgetLoad event received', obj);
+    console.log('[Chatbox Widget] onWidgetLoad event received', obj);
     const fieldData = obj.detail.fieldData;
     if (!fieldData) return;
     
@@ -78,16 +78,16 @@ window.addEventListener('onWidgetLoad', function (obj) {
                         const url = `https://cdn.7tv.app/emote/${emote.id}/2x.webp`;
                         sevtEmotes.set(emote.name, url);
                     });
-                    console.log(`[Lumina Chatbox] Loaded ${sevtEmotes.size} 7TV emotes.`);
+                    console.log(`[Chatbox Widget] Loaded ${sevtEmotes.size} 7TV emotes.`);
                 }
             })
-            .catch(err => console.error('[Lumina Chatbox] Error fetching 7TV emotes:', err));
+            .catch(err => console.error('[Chatbox Widget] Error fetching 7TV emotes:', err));
     }
 });
 
 // Listen directly to StreamElements events
 window.addEventListener('onEventReceived', function (obj) {
-    console.log('[Lumina Chatbox] onEventReceived fired', obj);
+    console.log('[Chatbox Widget] onEventReceived fired', obj);
     if (!obj.detail || !obj.detail.event) return;
     
     const listener = obj.detail.listener;

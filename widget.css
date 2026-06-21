@@ -1,5 +1,5 @@
 :root {
-  /* Lumina Stream Customizable Colors (Defaults) */
+  /* Customizable Colors (Defaults) */
   --bubble-bg: rgba(23, 31, 51, 0.6);
   --bubble-border: rgba(218, 226, 253, 0.1);
   --username-fallback: #d2bbff;
@@ -28,7 +28,7 @@ body {
   box-sizing: border-box;
 }
 
-.lumina-chat-container {
+.chat-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
